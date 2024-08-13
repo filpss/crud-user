@@ -6,6 +6,7 @@ import com.example.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -29,5 +30,9 @@ public class UserService {
                 null);
         User userSaved = userRepository.save(entity);
         return userSaved.getId();
+    }
+
+    public Optional<User> getUserById(String id) {
+        return userRepository.findById(Long.parseLong(id));
     }
 }
