@@ -40,4 +40,13 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public void deleteUser(String id) {
+
+        boolean userExists = userRepository.existsById(Long.parseLong(id));
+
+        if(userExists){
+            userRepository.deleteById(Long.parseLong(id));
+        }
+    }
 }

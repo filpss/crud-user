@@ -40,4 +40,10 @@ public class UserController {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUserById(@PathVariable("id") String Id) {
+        userService.deleteUser(Id);
+        return ResponseEntity.noContent().build();
+    }
 }
