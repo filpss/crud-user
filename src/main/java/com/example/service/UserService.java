@@ -6,6 +6,7 @@ import com.example.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,5 +35,9 @@ public class UserService {
 
     public Optional<User> getUserById(String id) {
         return userRepository.findById(Long.parseLong(id));
+    }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 }
