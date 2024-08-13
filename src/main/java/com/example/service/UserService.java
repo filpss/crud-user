@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.controller.CreateUserDto;
+import com.example.controller.UpdateUserDto;
 import com.example.model.User;
 import com.example.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,6 +40,25 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public void updateUser(String id, UpdateUserDto updateUserDto) {
+
+        Optional<User> user = userRepository.findById(Long.parseLong(id));
+
+        if(user.isPresent()){
+            User userFromDB = user.get();
+
+            if(updateUserDto.getUsername() != null){
+                userFromDB.setUsername(updateUserDto.getUsername());
+            }
+
+            if(updateUserDto.getPassword() != null){
+                userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+            }
+
+            userRepository.save(userFromDB);
+        }
     }
 
     public void deleteUser(String id) {
