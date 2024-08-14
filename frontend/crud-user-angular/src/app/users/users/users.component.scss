@@ -1,0 +1,33 @@
+.users-table {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.table {
+    width:  1500px;
+}
+
+.header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    font-size: 1.2rem;
+}
+
+.filter-input {
+    width: 300px;
+    padding-left: 15px;
+    border: none;
+}
+
+.filter-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
