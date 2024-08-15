@@ -1,23 +1,63 @@
 <div class="users-table">
-    <p-table class="table" [value]="users" [paginator]="true" [rows]="10">
+    <p-table class="table" [value]="filteredUsersArray" [paginator]="true" [scrollable]="true" scrollHeight="400px" [rows]="10" [rowsPerPageOptions]="[10,15,20]">
         <ng-template pTemplate="caption">
             <div class="header-container">
                 <h3>Lista de usuários</h3>
-                <input class="filter-input" pInputText type="text" placeholder="Filtrar pelo nome" />
+                <input class="filter-input" pInputText [(ngModel)]="inputValue" (ngModelChange)="filterUser()" type="text" placeholder="Filtrar pelo nome" />
             </div>
         </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
+                <th>Id</th>
                 <th>Nome</th>
                 <th>E-mail</th>
+                <th>Ações</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
+                <td>{{user.id}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
+                <td class="action-buttons">
+                    <button class="ui-button-secondary" type="button" pButton icon="pi pi-pencil" label="Editar usuário"></button>
+                    <button class="ui-button-danger" type="button" pButton icon="pi pi-trash" label="Remover usuário"></button>
+                </td>
             </tr>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button type="button" (click)="showModalDialog()" pButton icon="pi pi-user-plus" label="Cadastrar novo usuário"></button>
         </ng-template>
     </p-table>
 </div>
+
+<p-dialog header="Cadastrar novo usuário" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="username">Nome de usuário</label>
+            <input type="text" id="username" formControlName="username" class="form-control">
+            <div *ngIf="userForm.get('username').invalid && userForm.get('username').touched">
+                <p class="error-message">Nome de usuário obrigatório</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" id="password" formControlName="password" class="form-control">
+            <div *ngIf="userForm.get('password').invalid && userForm.get('password').touched">
+                <p class="error-message">Senha de usuário obrigatória</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" formControlName="email" class="form-control">
+            <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
+                <p class="error-message">E-mail de usuário obrigatório</p>
+            </div>
+        </div>
+        <p-footer>
+            <button type="submit" pButton icon="pi pi-check" [disabled]="userForm.invalid" label="Concluir"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="displayModal=false; userForm.reset()" label="Cancelar" class="ui-button-secondary"></button>
+        </p-footer>
+    </form>
+</p-dialog>
