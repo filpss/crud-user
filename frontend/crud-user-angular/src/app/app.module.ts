@@ -8,6 +8,9 @@ import {AppComponent} from './app.component';
 import {TableModule} from 'primeng/table';
 import {ToolbarModule} from 'primeng/toolbar';
 import {HttpClientModule} from '@angular/common/http';
+import {PaginatorModule} from 'primeng/paginator';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
     declarations: [
@@ -18,7 +21,9 @@ import {HttpClientModule} from '@angular/common/http';
         AppRoutingModule,
         TableModule,
         ToolbarModule,
-        HttpClientModule
+        HttpClientModule,
+        PaginatorModule,
+        BrowserAnimationsModule,
     ],
     providers: [],
     bootstrap: [AppComponent]
