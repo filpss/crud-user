@@ -22,7 +22,7 @@
                 <td>{{user.email}}</td>
                 <td class="action-buttons">
                     <button class="ui-button-secondary" type="button" pButton icon="pi pi-pencil" label="Editar usuário"></button>
-                    <button class="ui-button-danger" type="button" pButton icon="pi pi-trash" label="Remover usuário"></button>
+                    <button class="ui-button-danger" type="button" (click)="deleteUser(user.id)" pButton icon="pi pi-trash" label="Remover usuário"></button>
                 </td>
             </tr>
         </ng-template>
