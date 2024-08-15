@@ -31,17 +31,17 @@ export class UsersComponent implements OnInit {
     }
 
     onSubmit() {
-        if(this.userForm.valid) {
+        if (this.userForm.valid) {
             this.usersService.addUser(this.userForm.value).subscribe(
-                response => {
-                    console.log("Usuário adicionado", response);
+                () => {
+                    console.log('Usuário adicionado');
                     this.userForm.reset();
                     this.displayModal = false;
                 },
                 error => {
-                    console.error("Usuário não adicioado", error)
+                    console.error('Usuário não adicioado', error);
                 }
-            )
+            );
         }
     }
 
@@ -49,8 +49,19 @@ export class UsersComponent implements OnInit {
         this.filteredUsersArray = this.users.filter(users => users.username.toLowerCase().includes(this.inputValue.toLowerCase()));
     }
 
+    deleteUser(id: string): void {
+        if (confirm('Deseja mesmo excluir este usuário?')) {
+            this.usersService.deleteUser(id).subscribe(
+                () => {
+                    console.log('Usuário deletado');
+                    this.usersService.listAllUsers();
+                }, error => {
+                    console.log('Erro ao deletar usuário', error);
+            });
+        }
+    }
+
     showModalDialog() {
         this.displayModal = true;
     }
-
 }

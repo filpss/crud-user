@@ -1,0 +1,9 @@
+<div class="panel">
+    <p-panel header="Usuário pelo ID" [toggleable]="false" [style]="{'margin-bottom':'20px'}">
+        <h3 *ngIf="user">Você buscou o usuário <span>{{user.username}}</span> pelo ID <span>{{user.id}}</span></h3>
+        <h3 *ngIf="!user">Usuário inexistente</h3>
+    </p-panel>
+    <p-footer>
+        <button pButton type="button" label="Voltar" (click)="backToMainPage()" class="ui-button-info" style="margin-right: .25em"></button>
+    </p-footer>
+</div>
