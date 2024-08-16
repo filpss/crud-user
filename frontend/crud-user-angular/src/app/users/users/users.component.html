@@ -21,7 +21,7 @@
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
                 <td class="action-buttons">
-                    <button class="ui-button-secondary" type="button" pButton icon="pi pi-pencil" label="Editar usuário"></button>
+                    <button class="ui-button-secondary" type="button" (click)="openEditModal(user)" pButton icon="pi pi-pencil" label="Editar usuário"></button>
                     <button class="ui-button-danger" type="button" (click)="deleteUser(user.id)" pButton icon="pi pi-trash" label="Remover usuário"></button>
                 </td>
             </tr>
@@ -33,7 +33,7 @@
 </div>
 
 <p-dialog header="Cadastrar novo usuário" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-    <form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <form class="user-form" [formGroup]="userForm" (ngSubmit)="editMode? editUser() : createUser()">
         <div class="form-group">
             <label for="username">Nome de usuário</label>
             <input type="text" id="username" formControlName="username" class="form-control">
@@ -56,8 +56,8 @@
             </div>
         </div>
         <p-footer>
-            <button type="submit" pButton icon="pi pi-check" [disabled]="userForm.invalid" label="Concluir"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="displayModal=false; userForm.reset()" label="Cancelar" class="ui-button-secondary"></button>
+            <button type="submit" pButton icon="pi pi-check" [disabled]="userForm.invalid" label="{{editMode ? 'Atualizar' : 'Concluir'}}"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="displayModal=false; userForm.reset(); editMode=false" label="Cancelar" class="ui-button-secondary"></button>
         </p-footer>
     </form>
 </p-dialog>

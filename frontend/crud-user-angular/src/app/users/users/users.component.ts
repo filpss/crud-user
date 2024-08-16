@@ -14,12 +14,15 @@ export class UsersComponent implements OnInit {
     users: User[] = [];
     displayModal: boolean;
     userForm: FormGroup;
+    editMode: boolean;
+    selectedUser: User;
 
     constructor(private usersService: UsersService, private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
-        this.usersService.listAllUsers().subscribe((data: User[]) => {
+        this.usersService.listAllUsers().subscribe(
+        (data: User[]) => {
             this.users = data;
             this.filteredUsersArray = this.users;
         });
@@ -30,16 +33,16 @@ export class UsersComponent implements OnInit {
         });
     }
 
-    onSubmit() {
+    createUser() {
         if (this.userForm.valid) {
             this.usersService.addUser(this.userForm.value).subscribe(
                 () => {
-                    console.log('Usuário adicionado');
                     this.userForm.reset();
                     this.displayModal = false;
+                    window.location.reload(true);
                 },
                 error => {
-                    console.error('Usuário não adicioado', error);
+                    confirm('Erro ao cadastrar usuário: ' + error);
                 }
             );
         }
@@ -49,16 +52,43 @@ export class UsersComponent implements OnInit {
         this.filteredUsersArray = this.users.filter(users => users.username.toLowerCase().includes(this.inputValue.toLowerCase()));
     }
 
+    editUser() {
+        if (this.userForm.valid) {
+            this.usersService.updateUser(this.selectedUser.id, this.userForm.value).subscribe(
+                () => {
+                    this.displayModal = false;
+                    this.userForm.reset();
+                    window.location.reload();
+                },
+                error => {
+                    confirm('Erro ao atualizar usuário: ' + error);
+                }
+            );
+        }
+    }
+
     deleteUser(id: string): void {
         if (confirm('Deseja mesmo excluir este usuário?')) {
             this.usersService.deleteUser(id).subscribe(
                 () => {
-                    console.log('Usuário deletado');
+                    confirm('Usuário deletado com sucesso')
+                    window.location.reload(true);
                     this.usersService.listAllUsers();
                 }, error => {
-                    console.log('Erro ao deletar usuário', error);
+                    confirm('Erro ao deletar usuário: ' + error)
             });
         }
+    }
+
+    openEditModal(user: User) {
+        this.editMode = true;
+        this.selectedUser = user;
+        this.userForm.setValue({
+            username: user.username,
+            password: '',
+            email: user.email,
+        })
+        this.displayModal = true;
     }
 
     showModalDialog() {
