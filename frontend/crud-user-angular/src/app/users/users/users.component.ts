@@ -54,6 +54,10 @@ export class UsersComponent implements OnInit {
 
     editUser() {
         if (this.userForm.valid) {
+            let formData = this.userForm.value;
+            if (this.editMode && !formData.password) {
+                delete formData.password;
+            }
             this.usersService.updateUser(this.selectedUser.id, this.userForm.value).subscribe(
                 () => {
                     this.displayModal = false;
@@ -87,11 +91,23 @@ export class UsersComponent implements OnInit {
             username: user.username,
             password: '',
             email: user.email,
-        })
+        });
+        this.userForm.get('password').clearValidators();
+        this.userForm.get('password').updateValueAndValidity();
+        this.userForm.get('email').disable();
         this.displayModal = true;
     }
 
+    closeModal() {
+        this.displayModal = false;
+        this.userForm.reset();
+        this.userForm.enable();
+        this.editMode = false;
+    }
+
     showModalDialog() {
+        this.userForm.get('password').setValidators(Validators.required);
+        this.userForm.get('password').updateValueAndValidity();
         this.displayModal = true;
     }
 }

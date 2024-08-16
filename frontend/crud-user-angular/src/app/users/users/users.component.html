@@ -1,5 +1,5 @@
 <div class="users-table">
-    <p-table class="table" [value]="filteredUsersArray" [paginator]="true" [scrollable]="true" scrollHeight="400px" [rows]="10" [rowsPerPageOptions]="[10,15,20]">
+    <p-table [responsive]="true" class="table" [value]="filteredUsersArray" [paginator]="true" [scrollable]="true" scrollHeight="400px" [rows]="10" [rowsPerPageOptions]="[10,15,20]">
         <ng-template pTemplate="caption">
             <div class="header-container">
                 <h3>Lista de usuários</h3>
@@ -50,14 +50,14 @@
         </div>
         <div class="form-group">
             <label for="email">E-mail</label>
-            <input type="email" id="email" formControlName="email" class="form-control">
+            <input type="email" id="email" formControlName="email" [disabled]="editMode" class="form-control">
             <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched">
                 <p class="error-message">E-mail de usuário obrigatório</p>
             </div>
         </div>
         <p-footer>
             <button type="submit" pButton icon="pi pi-check" [disabled]="userForm.invalid" label="{{editMode ? 'Atualizar' : 'Concluir'}}"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="displayModal=false; userForm.reset(); editMode=false" label="Cancelar" class="ui-button-secondary"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="closeModal()" label="Cancelar" class="ui-button-secondary"></button>
         </p-footer>
     </form>
 </p-dialog>
