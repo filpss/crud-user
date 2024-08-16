@@ -53,13 +53,11 @@ public class UserService {
                 userFromDB.setUsername(updateUserDto.getUsername());
             }
 
-            if(updateUserDto.getPassword() != null){
-                userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
-            }
-
             if (updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
                 userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
             }
+
+            userFromDB.setUpdateTimestamp(Instant.now());
 
             userRepository.save(userFromDB);
         }
