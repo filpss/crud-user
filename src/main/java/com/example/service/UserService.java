@@ -57,6 +57,10 @@ public class UserService {
                 userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
             }
 
+            if (updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
+                userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
+            }
+
             userRepository.save(userFromDB);
         }
     }
