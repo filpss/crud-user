@@ -75,7 +75,6 @@ export class UsersComponent implements OnInit {
         if (confirm('Deseja mesmo excluir este usuário?')) {
             this.usersService.deleteUser(id).subscribe(
                 () => {
-                    confirm('Usuário deletado com sucesso')
                     window.location.reload(true);
                     this.usersService.listAllUsers();
                 }, error => {
