@@ -22,8 +22,12 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody CreateUserDto createUserDto) {
-        Long Id = userService.createUser(createUserDto);
-        return ResponseEntity.created(URI.create("/users/" + Id.toString())).build();
+        try {
+            Long Id = userService.createUser(createUserDto);
+            return ResponseEntity.created(URI.create("/users/" + Id.toString())).build();
+        } catch (IllegalArgumentException exeption) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @GetMapping("/{id}")
@@ -44,8 +48,12 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> udateUserById(@PathVariable("id") String id, @RequestBody UpdateUserDto updateUserDto) {
-        userService.updateUser(id, updateUserDto);
-        return  ResponseEntity.noContent().build();
+        try {
+            userService.updateUser(id, updateUserDto);
+            return  ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
     @DeleteMapping("/{id}")

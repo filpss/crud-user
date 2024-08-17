@@ -43,7 +43,11 @@ export class UsersComponent implements OnInit {
                     window.location.reload(true);
                 },
                 error => {
-                    confirm('Erro ao cadastrar usuário: ' + error);
+                    if(error.status === 400) {
+                        confirm('Nome de usuário ou e-mail já cadastrados');
+                    } else {
+                        confirm('Erro ao cadastrar usuário: ' + error.message);
+                    }
                 }
             );
         }
@@ -66,7 +70,11 @@ export class UsersComponent implements OnInit {
                     window.location.reload();
                 },
                 error => {
-                    confirm('Erro ao atualizar usuário: ' + error);
+                    if(error.status === 400) {
+                        confirm('Nome de usuário já cadastrado');
+                    } else {
+                        confirm('Erro ao atualizar usuário: ' + error);
+                    }
                 }
             );
         }

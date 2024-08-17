@@ -22,7 +22,23 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public boolean userExistsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean userExistsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     public Long createUser(CreateUserDto createUserDto) {
+        if (userExistsByUsername(createUserDto.getUsername())) {
+            throw new IllegalArgumentException("Nome de usuário já cadastrado!");
+        }
+
+        if (userExistsByEmail(createUserDto.getEmail())) {
+            throw new IllegalArgumentException("E-mail já cadastrado");
+        }
+
         String encodedPassword = passwordEncoder.encode(createUserDto.getPassword());
 
         User entity = new User(null,
@@ -49,6 +65,10 @@ public class UserService {
 
         if(user.isPresent()){
             User userFromDB = user.get();
+
+            if(updateUserDto.getUsername() != null && userRepository.existsByUsername(updateUserDto.getUsername()) && !Objects.equals(userFromDB.getUsername(), updateUserDto.getUsername())){
+                throw new IllegalArgumentException();
+            }
 
             if(updateUserDto.getUsername() != null){
                 userFromDB.setUsername(updateUserDto.getUsername());
