@@ -1,7 +1,44 @@
 :host ::ng-deep {
     .ui-table .ui-table-thead > tr > th {
+        border: none;
         background: #263238;
         color: white;
+    }
+
+    .ui-table .ui-table-caption {
+        background: #263238;
+    }
+
+     .ui-button-danger {
+        background: darkred !important;
+         border: none !important;
+        color: white;
+    }
+
+    .ui-button {
+        outline: none;
+        box-shadow: none !important;
+        background: #263238;
+        color: white;
+        border: none;
+        transition: background-color 0.4s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    }
+
+    .ui-button:enabled:hover {
+        background: #354c56;
+        transform: scale(1.1);
+    }
+
+    .ui-paginator-page.ui-state-active {
+        background: #263238 !important;
+    }
+
+    .ui-dropdown-item.ui-state-highlight {
+        background: #263238 !important;
+    }
+
+    .ui-table-scrollable-footer-box, .ui-table-scrollable-header-box {
+        padding: 0 !important;
     }
 
     .ui-widget {
@@ -25,15 +62,18 @@
         .ui-dropdown {
             width: 80px;
             float: left;
+            box-shadow: none !important;
         }
     }
 
+
     .ui-table-tfoot {
+        background: #f4f4f4;
         display: flex;
         justify-content: flex-end;
         padding: 35px 24px 35px 0;
         align-items: center;
-        height: 50px;
+        height: 20px;
     }
 
     .ui-button-text {
@@ -44,9 +84,62 @@
         display: flex;
         justify-content: space-around;
     }
+
+    .ui-dialog {
+        width: 25vw;
+        border-radius: 20px;
+
+        input {
+            border-radius: 0;
+            border: none;
+            border-bottom: 1px solid #333333;
+        }
+
+        .ui-dialog-titlebar {
+            background: #263238;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .ui-dialog-content {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+
+            label {
+                font-weight: 400;
+            }
+        }
+
+        p-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            padding: 20px 0 10px 0;
+
+            .ui-button {
+                width: 50%;
+            }
+        }
+    }
+
+    .user-icon {
+        padding: 20px 0 0 0;
+        text-align: center;
+    }
+
+    .checkbox {
+        box-shadow: none;
+        text-align: center;
+        width: 100px;
+    }
+
+    .ui-chkbox {
+        box-shadow: none;
+    }
 }
 
 .users-table {
+    background: #e1e1e1;
     height: 100%;
     width: 100%;
     display: flex;
@@ -58,7 +151,12 @@
     width:  1500px;
 }
 
+.ui-table-caption {
+    background: #263238;
+}
+
 .header-container {
+    background: #263238;
     padding: 10px;
     display: flex;
     flex-direction: row;
@@ -105,12 +203,6 @@ h3 {
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
-}
-
-p-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
 }
 
 .error-message {

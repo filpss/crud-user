@@ -16,6 +16,7 @@ export class UsersComponent implements OnInit {
     userForm: FormGroup;
     editMode: boolean;
     selectedUser: User;
+    selectedValues: User[] = [];
 
     constructor(private usersService: UsersService, private formBuilder: FormBuilder) {
     }

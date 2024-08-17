@@ -9,7 +9,8 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th>Id</th>
+                <th style="width: 100px"></th>
+                <th style="width: 100px">Id</th>
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Ações</th>
@@ -17,7 +18,8 @@
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
-                <td>{{user.id}}</td>
+                <td class="checkbox"><p-checkbox name="groupname" [value]=user.id [(ngModel)]="selectedValues"></p-checkbox></td>
+                <td style="width: 100px;">{{user.id}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
                 <td class="action-buttons">
@@ -32,7 +34,10 @@
     </p-table>
 </div>
 
-<p-dialog header="Cadastrar novo usuário" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+<p-dialog header="Cadastrar novo usuário" [(visible)]="displayModal" [modal]="true"  [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+    <div class="user-icon">
+        <i class="pi pi-user" style="font-size: 2.5em"></i>
+    </div>
     <form class="user-form" [formGroup]="userForm" (ngSubmit)="editMode? editUser() : createUser()">
         <div class="form-group">
             <label for="username">Nome de usuário</label>

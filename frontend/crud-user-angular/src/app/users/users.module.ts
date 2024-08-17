@@ -12,7 +12,8 @@ import {DialogModule} from 'primeng/dialog';
 import {ButtonModule} from 'primeng/button';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PanelModule} from 'primeng/panel';
-import { UserByIdComponent } from './user-by-id/user-by-id.component';
+import {UserByIdComponent} from './user-by-id/user-by-id.component';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [UsersComponent, UserByIdComponent],
@@ -26,7 +27,8 @@ import { UserByIdComponent } from './user-by-id/user-by-id.component';
         DialogModule,
         ButtonModule,
         ReactiveFormsModule,
-        PanelModule
+        PanelModule,
+        CheckboxModule
     ]
 })
 export class UsersModule { }

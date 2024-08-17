@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -57,7 +58,9 @@ public class UserService {
                 userFromDB.setPassword(passwordEncoder.encode(updateUserDto.getPassword()));
             }
 
-            userFromDB.setUpdateTimestamp(Instant.now());
+            if(Objects.equals(userFromDB.getUsername(), updateUserDto.getUsername()) && Objects.equals(userFromDB.getPassword(), updateUserDto.getPassword())) {
+                userFromDB.setUpdateTimestamp(Instant.now());
+            }
 
             userRepository.save(userFromDB);
         }

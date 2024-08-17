@@ -1,9 +1,20 @@
 h1 {
     color: white;
+    font-size: 1.4rem;
 }
 
 :host ::ng-deep  {
+    .ui-toolbar {
+        display: flex;
+    }
+
     .header {
+        height: 60px;
         background: #263238 ;
+
+        h1 {
+            display: flex;
+            align-items: center;
+        }
     }
 }
