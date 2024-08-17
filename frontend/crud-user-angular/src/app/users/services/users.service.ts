@@ -34,4 +34,8 @@ export class UsersService {
     deleteUser(id: string): Observable<void> {
         return this.httpClient.delete<void>(`${this.API}/${id}`);
     }
+
+    deleteListOfUsers(idList: Object[]): Observable<void> {
+        return this.httpClient.request<void>('DELETE', `${this.API}/delete`, {body: {idList}});
+    }
 }

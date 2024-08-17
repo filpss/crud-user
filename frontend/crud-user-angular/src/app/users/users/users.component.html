@@ -9,7 +9,9 @@
 
         <ng-template pTemplate="header">
             <tr>
-                <th style="width: 100px"></th>
+                <th style="width: 170px">
+                    <button class="ui-button-danger delete-listed" type="button" (click)="deleteSelectedUsers()" pButton icon="pi pi-trash" label="Remover lista"></button>
+                </th>
                 <th style="width: 100px">Id</th>
                 <th>Nome</th>
                 <th>E-mail</th>
@@ -18,7 +20,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-user>
             <tr>
-                <td class="checkbox"><p-checkbox name="groupname" [value]=user.id [(ngModel)]="selectedValues"></p-checkbox></td>
+                <td class="checkbox"><p-checkbox name="groupname" [value]="user.id" [(ngModel)]="selectedValues"></p-checkbox></td>
                 <td style="width: 100px;">{{user.id}}</td>
                 <td>{{user.username}}</td>
                 <td>{{user.email}}</td>
@@ -29,7 +31,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="footer">
-            <button type="button" (click)="showModalDialog()" pButton icon="pi pi-user-plus" label="Cadastrar novo usuário"></button>
+            <button class="btn-foot-table" type="button" (click)="showModalDialog()" pButton icon="pi pi-user-plus" label="Cadastrar novo usuário"></button>
         </ng-template>
     </p-table>
 </div>

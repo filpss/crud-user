@@ -1,7 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {UsersService} from '../services/users.service';
-import {User} from '../model/user';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {
+    Component,
+    OnInit
+} from '@angular/core';
+import {
+    UsersService
+} from '../services/users.service';
+import {
+    User
+} from '../model/user';
+import {
+    FormBuilder,
+    FormGroup,
+    Validators
+} from '@angular/forms';
 
 @Component({
     selector: 'app-users',
@@ -16,17 +27,17 @@ export class UsersComponent implements OnInit {
     userForm: FormGroup;
     editMode: boolean;
     selectedUser: User;
-    selectedValues: User[] = [];
+    selectedValues: any[] = [];
 
     constructor(private usersService: UsersService, private formBuilder: FormBuilder) {
     }
 
     ngOnInit(): void {
         this.usersService.listAllUsers().subscribe(
-        (data: User[]) => {
-            this.users = data;
-            this.filteredUsersArray = this.users;
-        });
+            (data: User[]) => {
+                this.users = data;
+                this.filteredUsersArray = this.users;
+            });
         this.userForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', Validators.required],
@@ -72,6 +83,22 @@ export class UsersComponent implements OnInit {
         }
     }
 
+    deleteSelectedUsers() {
+        if (confirm('Deseja mesmo excluir este usuário?')) {
+            if (this.selectedValues != null && this.selectedValues) {
+                this.usersService.deleteListOfUsers(this.selectedValues).subscribe(
+                    () => {
+                        window.location.reload(true);
+                        this.usersService.listAllUsers();
+                    },
+                    error => {
+                        confirm('Erro ao deletar lista de usuários' + error);
+                    }
+                )
+            }
+        }
+    }
+
     deleteUser(id: string): void {
         if (confirm('Deseja mesmo excluir este usuário?')) {
             this.usersService.deleteUser(id).subscribe(
@@ -80,7 +107,7 @@ export class UsersComponent implements OnInit {
                     this.usersService.listAllUsers();
                 }, error => {
                     confirm('Erro ao deletar usuário: ' + error)
-            });
+                });
         }
     }
 

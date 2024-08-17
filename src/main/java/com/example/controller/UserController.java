@@ -53,4 +53,10 @@ public class UserController {
         userService.deleteUser(Id);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> deleteListOfUsersId(@RequestBody UsersIdsDto usersIdsDto) {
+        userService.deleteListOfUsers(usersIdsDto.getIdList());
+        return ResponseEntity.noContent().build();
+    }
 }

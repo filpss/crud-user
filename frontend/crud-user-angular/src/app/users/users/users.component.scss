@@ -26,7 +26,7 @@
 
     .ui-button:enabled:hover {
         background: #354c56;
-        transform: scale(1.1);
+        transform: scale(1.08);
     }
 
     .ui-paginator-page.ui-state-active {
@@ -76,6 +76,10 @@
         height: 20px;
     }
 
+    .btn-foot-table {
+        margin-right: 13px !important;
+    }
+
     .ui-button-text {
         margin-left: 10px;
     }
@@ -122,6 +126,14 @@
         }
     }
 
+    .ui-table .ui-table-tbody > tr {
+        background: #eeeeee;
+    }
+
+    .ui-table .ui-table-tbody > tr > td {
+        text-align: center;
+    }
+
     .user-icon {
         padding: 20px 0 0 0;
         text-align: center;
@@ -130,11 +142,21 @@
     .checkbox {
         box-shadow: none;
         text-align: center;
-        width: 100px;
+        width: 160px;
     }
 
     .ui-chkbox {
         box-shadow: none;
+    }
+
+    .ui-paginator .ui-paginator-pages .ui-paginator-page:focus {
+        outline: none;
+        box-shadow: none !important;
+    }
+
+    .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last {
+        outline: none;
+        box-shadow: none !important;
     }
 }
 

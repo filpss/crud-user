@@ -74,4 +74,12 @@ public class UserService {
             userRepository.deleteById(Long.parseLong(id));
         }
     }
+
+    public void deleteListOfUsers(List<Long> ids) {
+        if(ids != null && !ids.isEmpty()) {
+            if(!userRepository.findAllById(ids).isEmpty()) {
+                userRepository.deleteAllById(ids);
+            }
+        }
+    }
 }

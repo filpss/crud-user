@@ -14,5 +14,9 @@ span {
 :host ::ng-deep {
     .ui-panel {
         margin: 0 auto;
+
+        .ui-panel-footer {
+            text-align: center;
+        }
     }
 }
