@@ -1,18 +1,7 @@
-import {
-    Component,
-    OnInit
-} from '@angular/core';
-import {
-    UsersService
-} from '../services/users.service';
-import {
-    User
-} from '../model/user';
-import {
-    FormBuilder,
-    FormGroup,
-    Validators
-} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {UsersService} from '../services/users.service';
+import {User} from '../model/user';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-users',
@@ -20,7 +9,7 @@ import {
     styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-    inputValue: string = '';
+    inputUsernameValue: string = '';
     filteredUsersArray: any[] = [];
     users: User[] = [];
     displayModal: boolean;
@@ -60,8 +49,8 @@ export class UsersComponent implements OnInit {
         }
     }
 
-    filterUser() {
-        this.filteredUsersArray = this.users.filter(users => users.username.toLowerCase().includes(this.inputValue.toLowerCase()));
+    filterUserByName() {
+        this.filteredUsersArray = this.users.filter(users => users.username.toLowerCase().includes(this.inputUsernameValue.toLowerCase()));
     }
 
     editUser() {

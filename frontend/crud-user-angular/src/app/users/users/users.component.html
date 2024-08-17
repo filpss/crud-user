@@ -3,17 +3,17 @@
         <ng-template pTemplate="caption">
             <div class="header-container">
                 <h3>Lista de usuários</h3>
-                <input class="filter-input" pInputText [(ngModel)]="inputValue" (ngModelChange)="filterUser()" type="text" placeholder="Filtrar pelo nome" />
+                <input class="filter filter-input" pInputText [(ngModel)]="inputUsernameValue" (ngModelChange)="filterUserByName()" type="text" placeholder="Filtrar pelo nome de usuário" />
             </div>
         </ng-template>
 
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 170px">
-                    <button class="ui-button-danger delete-listed" type="button" (click)="deleteSelectedUsers()" pButton icon="pi pi-trash" label="Remover lista"></button>
+                    <button *ngIf="selectedValues.length >= 1" class="ui-button-danger delete-listed" [disabled]="" type="button" (click)="deleteSelectedUsers()" pButton icon="pi pi-trash" label="Remover lista"></button>
                 </th>
                 <th style="width: 100px">Id</th>
-                <th>Nome</th>
+                <th>Nome de usuário</th>
                 <th>E-mail</th>
                 <th>Ações</th>
             </tr>
