@@ -33,6 +33,11 @@
         <ng-template pTemplate="footer">
             <button class="btn-foot-table" type="button" (click)="showModalDialog()" pButton icon="pi pi-user-plus" label="Cadastrar novo usuário"></button>
         </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8" style="text-align:center; height: 100px;">Nenhum usuário encontrado.</td>
+            </tr>
+        </ng-template>
     </p-table>
 </div>
 
